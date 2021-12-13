@@ -1,18 +1,18 @@
 from utils.common import read_config
 import argparse
 from utils.data_mgmt import get_data
+from utils.data_mgmt import get_data_overview
+from utils.data_mgmt import get_eda_results
 
 
 def training(config_path):
     config = read_config(config_path)
-    testing_datasize = config['params']['testing_datasize']
+    testing_datasize = config['params']['testing_datasize'] #TO DO from config.yaml
     train_data, resource_data = get_data()
-    train_data_null = train_data.isnull().sum()
-    resource_data_null = resource_data.isnull().sum()
-    print(f"null data for training set")
-    print(train_data_null)
-    print(f"null data for resource set")
-    print(resource_data_null)
+    get_data_overview(train_data, resource_data)
+    get_eda_results(train_data, resource_data)
+     
+    
 
 
 if __name__ == '__main__':
