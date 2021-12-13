@@ -110,53 +110,53 @@ def project_title_eda(train_data):
     plt.grid()
     plt.show()
     
-def project_eassay_eda(train_data):
-    train_data["essay"] = train_data["project_essay_1"].map(str) +\
-                        train_data["project_essay_2"].map(str) + \
-                        train_data["project_essay_3"].map(str) + \
-                        train_data["project_essay_4"].map(str)
+# def project_eassay_eda(train_data):
+    # train_data["essay"] = train_data["project_essay_1"].map(str) +\
+    #                     train_data["project_essay_2"].map(str) + \
+    #                     train_data["project_essay_3"].map(str) + \
+    #                     train_data["project_essay_4"].map(str)
 
-    word_count = train_data['essay'].str.split().apply(len).value_counts()
-    word_dict = dict(word_count)
-    word_dict = dict(sorted(word_dict.items(), key=lambda kv: kv[1]))
-
-
-    ind = np.arange(len(word_dict))
-    plt.figure(figsize=(20,5))
-    p1 = plt.bar(ind, list(word_dict.values()))
-
-    plt.ylabel('Number of projects')
-    plt.xlabel('Number of words in each eassay')
-    plt.title('Words for each essay of the project')
-    plt.xticks(ind, list(word_dict.keys()))
-    plt.show()
-
-    sns.distplot(word_count.values)
-    plt.title('Words for each essay of the project')
-    plt.xlabel('Number of words in each eassay')
-    plt.show()
-
-    approved_word_count = train_data[train_data['project_is_approved']==1]['essay'].str.split().apply(len)
-    approved_word_count = approved_word_count.values
-
-    rejected_word_count = train_data[train_data['project_is_approved']==0]['essay'].str.split().apply(len)
-    rejected_word_count = rejected_word_count.values
-
-    plt.boxplot([approved_word_count, rejected_word_count])
-    plt.title('Words for each essay of the project')
-    plt.xticks([1,2],('Approved Projects','Rejected Projects'))
-    plt.ylabel('Words in project title')
-    plt.grid()
-    plt.show()
+    # word_count = train_data['essay'].str.split().apply(len).value_counts()
+    # word_dict = dict(word_count)
+    # word_dict = dict(sorted(word_dict.items(), key=lambda kv: kv[1]))
 
 
-    plt.figure(figsize=(10,3))
-    sns.distplot(approved_word_count, hist=False, label="Approved Projects")
-    sns.distplot(rejected_word_count, hist=False, label="Not Approved Projects")
-    plt.title('Words for each essay of the project')
-    plt.xlabel('Number of words in each eassay')
-    plt.legend()
-    plt.show()
+    # ind = np.arange(len(word_dict))
+    # plt.figure(figsize=(20,5))
+    # p1 = plt.bar(ind, list(word_dict.values()))
+
+    # plt.ylabel('Number of projects')
+    # plt.xlabel('Number of words in each eassay')
+    # plt.title('Words for each essay of the project')
+    # plt.xticks(ind, list(word_dict.keys()))
+    # plt.show()
+
+    # sns.distplot(word_count.values)
+    # plt.title('Words for each essay of the project')
+    # plt.xlabel('Number of words in each eassay')
+    # plt.show()
+
+    # approved_word_count = train_data[train_data['project_is_approved']==1]['essay'].str.split().apply(len)
+    # approved_word_count = approved_word_count.values
+
+    # rejected_word_count = train_data[train_data['project_is_approved']==0]['essay'].str.split().apply(len)
+    # rejected_word_count = rejected_word_count.values
+
+    # plt.boxplot([approved_word_count, rejected_word_count])
+    # plt.title('Words for each essay of the project')
+    # plt.xticks([1,2],('Approved Projects','Rejected Projects'))
+    # plt.ylabel('Words in project title')
+    # plt.grid()
+    # plt.show()
+
+
+    # plt.figure(figsize=(10,3))
+    # sns.distplot(approved_word_count, hist=False, label="Approved Projects")
+    # sns.distplot(rejected_word_count, hist=False, label="Not Approved Projects")
+    # plt.title('Words for each essay of the project')
+    # plt.xlabel('Number of words in each eassay')
+    # plt.legend()
+    # plt.show()
 
 def previous_submitted_projects(train_data):  
     univariate_barplots(train_data, 'teacher_number_of_previously_posted_projects', 'project_is_approved', top=50)

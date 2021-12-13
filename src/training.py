@@ -3,6 +3,7 @@ import argparse
 from utils.data_mgmt import get_data
 from utils.data_mgmt import get_data_overview
 from utils.data_mgmt import get_eda_results
+from utils.data_mgmt import data_preprocessing
 
 
 def training(config_path):
@@ -11,6 +12,7 @@ def training(config_path):
     train_data, resource_data = get_data()
     get_data_overview(train_data, resource_data)
     get_eda_results(train_data, resource_data)
+    data_preprocessing(train_data, resource_data)
      
     
 
