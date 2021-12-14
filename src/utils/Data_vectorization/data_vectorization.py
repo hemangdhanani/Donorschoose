@@ -23,7 +23,7 @@ def train_test_split_data(data):
     y = data['project_is_approved'].values
     X = data.drop(['project_is_approved'], axis=1)
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, stratify=y,random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, stratify=y,random_state=42)
     
     print(f"X_train len is 1 --> {len(X_train)}")
     print(f"X_test len is 2 --> {len(X_test)} ")

@@ -5,7 +5,7 @@ from utils.data_mgmt import get_data_overview
 from utils.data_mgmt import get_eda_results
 from utils.data_mgmt import data_preprocessing
 from utils.data_mgmt import data_vectorization_process
-
+from models.naive_bayes import multinomial_naive_bayes
 
 def training(config_path):
     config = read_config(config_path)
@@ -14,7 +14,9 @@ def training(config_path):
     get_data_overview(train_data, resource_data)
     get_eda_results(train_data, resource_data)
     train_data_clean = data_preprocessing(train_data, resource_data)
-    data_vectorization_process(train_data_clean)
+    X_tr_vec, X_test_vec, y_train, y_test = data_vectorization_process(train_data_clean)
+    multinomial_naive_bayes(X_tr_vec, X_test_vec, y_train, y_test)
+    #model()
      
     
 

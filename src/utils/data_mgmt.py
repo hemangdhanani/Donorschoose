@@ -93,14 +93,15 @@ def data_vectorization_process(train_data_clean):
     price_norm, price_norm_test = price_normalized(X_train, X_test)
     essay_tfidf, essay_tfidf_test = essay_ohe(X_train, X_test)
     project_title_tfidf, project_title_tfidf_test = project_title_ohe(X_train, X_test)
-    X_tr = merge_train_vectorization_columns(school_state_oho, teacher_pre_oho, project_grade_oho, X_train_posted_project_norm,
+    X_tr_oho = merge_train_vectorization_columns(school_state_oho, teacher_pre_oho, project_grade_oho, X_train_posted_project_norm,
                                                 clean_categories_oho, clean_subcategories_oho, price_norm, essay_tfidf, project_title_tfidf)
 
-    X_test = merge_test_vectorization_columns(school_state_oho_test, teacher_pre_oho_test, project_grade_oho_test, X_train_posted_project_norm_test,
+    X_test_oho = merge_test_vectorization_columns(school_state_oho_test, teacher_pre_oho_test, project_grade_oho_test, X_train_posted_project_norm_test,
                                                 clean_categories_oho_test, clean_subcategories_oho_test, price_norm_test, essay_tfidf_test, project_title_tfidf_test)        
 
-
-    print("till now it's clean")    
+    
+    return X_tr_oho, X_test_oho, y_train, y_test
+    # print("till now it's clean")    
     # print("You are Done!")
     
 
