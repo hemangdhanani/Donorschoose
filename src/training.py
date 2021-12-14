@@ -12,7 +12,7 @@ def training(config_path):
     train_data, resource_data = get_data()
     get_data_overview(train_data, resource_data)
     get_eda_results(train_data, resource_data)
-    data_preprocessing(train_data, resource_data)
+    train_data_clean = data_preprocessing(train_data, resource_data)
      
     
 

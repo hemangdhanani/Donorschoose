@@ -156,21 +156,26 @@ def get_clean_essay(train_data):
     train_data["essay"] = preprocessed_essays
     return train_data
 
-def get_normalized_std_price(train_data):
-    # scaler_std = StandardScaler()
-    # # scaler_std.fit(train_data['price'].values.reshape(-1, 1))
-    # train_data['std_price'] = scaler_std.fit_transform(train_data['price'].values.reshape(-1, 1) )
-
-    # scaler_norm = MinMaxScaler()
-    # # scaler_norm.fit(train_data['price'].values.reshape(-1, 1))
-    # train_data['nrm_price']=scaler_norm.fit_transform(train_data['price'].values.reshape(-1, 1))
-
-    return train_data
-
 def get_project_resource_summary(train_data):
     preprocessed_resource_summary = preprocess_text(train_data['project_resource_summary'].values)
     train_data['project_resource_summary'] = preprocessed_resource_summary
     return train_data
+
+def merge_train_resources(train_data, resource_data):
+    price_data = resource_data.groupby('id').agg({'price':'sum', 'quantity':'sum'}).reset_index()
+    train_data = pd.merge(train_data, price_data, on='id', how='left')       
+    return train_data
+
+def get_std_norm_price(train_data):
+    scaler_std = StandardScaler()
+    scaler_std.fit(train_data['price'].values.reshape(-1, 1))
+    train_data['std_price'] = scaler_std.transform(train_data['price'].values.reshape(-1, 1) )
+
+    scaler_norm = MinMaxScaler()
+    scaler_norm.fit(train_data['price'].values.reshape(-1, 1))
+    train_data['nrm_price']=scaler_norm.transform(train_data['price'].values.reshape(-1, 1))
+    return train_data    
+
 
 def drop_columns(train_data):
     train_data.drop(['Unnamed: 0'], axis=1, inplace=True)

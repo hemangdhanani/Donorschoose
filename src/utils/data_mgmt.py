@@ -16,9 +16,10 @@ from utils.Data_Preprocess.pre_processing import get_clean_subject_sub_category
 from utils.Data_Preprocess.pre_processing import get_clean_school_state_data
 from utils.Data_Preprocess.pre_processing import get_clean_project_title
 from utils.Data_Preprocess.pre_processing import get_clean_essay
-from utils.Data_Preprocess.pre_processing import get_normalized_std_price
+from utils.Data_Preprocess.pre_processing import merge_train_resources
 from utils.Data_Preprocess.pre_processing import get_project_resource_summary
 from utils.Data_Preprocess.pre_processing import drop_columns
+from utils.Data_Preprocess.pre_processing import get_std_norm_price
 
 
 def get_data():
@@ -60,9 +61,11 @@ def data_preprocessing(train_data, resource_data):
     train_data_school_state = get_clean_school_state_data(train_data_sub_cat)
     train_data_project_title = get_clean_project_title(train_data_school_state)
     train_data_clean_essay = get_clean_essay(train_data_project_title)
-    train_data_price_normalized = get_normalized_std_price(train_data_clean_essay)
-    train_data_resource_summary = get_project_resource_summary(train_data_price_normalized)
-    train_data_clean = drop_columns(train_data_resource_summary)
+    train_data_price_merged = merge_train_resources(train_data_clean_essay, resource_data)
+    train_data_resource_summary = get_project_resource_summary(train_data_price_merged)
+    train_data_std_norm = get_std_norm_price(train_data_resource_summary)
+    train_data_clean = drop_columns(train_data_std_norm)
+    return train_data_clean
     # train_data_clean.to_csv("1.1_train_data_eassay.csv")
 
     
