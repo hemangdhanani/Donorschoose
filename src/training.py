@@ -6,6 +6,7 @@ from utils.data_mgmt import get_eda_results
 from utils.data_mgmt import data_preprocessing
 from utils.data_mgmt import data_vectorization_process
 from models.naive_bayes import multinomial_naive_bayes
+from models.logistic_regression import logistic_regression_model
 
 def training(config_path):
     config = read_config(config_path)
@@ -16,6 +17,7 @@ def training(config_path):
     train_data_clean = data_preprocessing(train_data, resource_data)
     X_tr_vec, X_test_vec, y_train, y_test = data_vectorization_process(train_data_clean)
     multinomial_naive_bayes(X_tr_vec, X_test_vec, y_train, y_test)
+    logistic_regression_model(X_tr_vec, X_test_vec, y_train, y_test)
     #model()
      
     

@@ -15,17 +15,17 @@ def multinomial_naive_bayes(X_tr_vec, X_test_vec, y_train, y_test):
     cv_auc = clf.cv_results_['mean_test_score']
     cv_auc_std = clf.cv_results_['std_test_score']
     best_alpha2 = clf.best_params_['alpha']
-    print("="*30)
-    print(f"Best parameter value is : {bestparameter}")
-    print("="*30)
-    print(f"train_auc is : {train_auc}")
-    print("="*30)
-    print(f"train_auc_std is : {train_auc_std}")
-    print("="*30)
-    print(f"cv_auc is : {cv_auc}")
-    print("="*30)
-    print(f"cv_auc_std is : {cv_auc_std}")
-    print("="*30)
+    # print("="*30)
+    # print(f"Best parameter value is : {bestparameter}")
+    # print("="*30)
+    # print(f"train_auc is : {train_auc}")
+    # print("="*30)
+    # print(f"train_auc_std is : {train_auc_std}")
+    # print("="*30)
+    # print(f"cv_auc is : {cv_auc}")
+    # print("="*30)
+    # print(f"cv_auc_std is : {cv_auc_std}")
+    # print("="*30)
     print(f"best_alpha2 is : {best_alpha2}")
     print("="*30)
 
