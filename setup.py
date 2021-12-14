@@ -20,6 +20,7 @@ setup(
         "matplotlib",
         "nltk",
         "seaborn",
-        "sklearn"
+        "sklearn",
+        "scipy"
     ]
 )

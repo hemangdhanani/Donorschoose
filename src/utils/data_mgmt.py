@@ -20,6 +20,19 @@ from utils.Data_Preprocess.pre_processing import merge_train_resources
 from utils.Data_Preprocess.pre_processing import get_project_resource_summary
 from utils.Data_Preprocess.pre_processing import drop_columns
 from utils.Data_Preprocess.pre_processing import get_std_norm_price
+from utils.Data_vectorization.data_vectorization import drop_nans
+from utils.Data_vectorization.data_vectorization import train_test_split_data
+from utils.Data_vectorization.data_vectorization import school_state_ohe
+from utils.Data_vectorization.data_vectorization import teacher_prefix_ohe
+from utils.Data_vectorization.data_vectorization import project_grade_category_ohe
+from utils.Data_vectorization.data_vectorization import previous_submitted_projects_norm
+from utils.Data_vectorization.data_vectorization import clean_categories
+from utils.Data_vectorization.data_vectorization import clean_sub_categories
+from utils.Data_vectorization.data_vectorization import price_normalized
+from utils.Data_vectorization.data_vectorization import essay_ohe
+from utils.Data_vectorization.data_vectorization import project_title_ohe
+from utils.Data_vectorization.data_vectorization import merge_train_vectorization_columns
+from utils.Data_vectorization.data_vectorization import merge_test_vectorization_columns
 
 
 def get_data():
@@ -68,5 +81,26 @@ def data_preprocessing(train_data, resource_data):
     return train_data_clean
     # train_data_clean.to_csv("1.1_train_data_eassay.csv")
 
+def data_vectorization_process(train_data_clean):
+    train_data_without_nan = drop_nans(train_data_clean)
+    X_train, X_test, y_train, y_test = train_test_split_data(train_data_without_nan)
+    school_state_oho, school_state_oho_test = school_state_ohe(X_train, X_test)
+    teacher_pre_oho, teacher_pre_oho_test = teacher_prefix_ohe(X_train, X_test)
+    project_grade_oho, project_grade_oho_test = project_grade_category_ohe(X_train, X_test)
+    X_train_posted_project_norm, X_train_posted_project_norm_test = previous_submitted_projects_norm(X_train, X_test)
+    clean_categories_oho, clean_categories_oho_test = clean_categories(X_train, X_test)
+    clean_subcategories_oho, clean_subcategories_oho_test = clean_sub_categories(X_train, X_test)
+    price_norm, price_norm_test = price_normalized(X_train, X_test)
+    essay_tfidf, essay_tfidf_test = essay_ohe(X_train, X_test)
+    project_title_tfidf, project_title_tfidf_test = project_title_ohe(X_train, X_test)
+    X_tr = merge_train_vectorization_columns(school_state_oho, teacher_pre_oho, project_grade_oho, X_train_posted_project_norm,
+                                                clean_categories_oho, clean_subcategories_oho, price_norm, essay_tfidf, project_title_tfidf)
+
+    X_test = merge_test_vectorization_columns(school_state_oho_test, teacher_pre_oho_test, project_grade_oho_test, X_train_posted_project_norm_test,
+                                                clean_categories_oho_test, clean_subcategories_oho_test, price_norm_test, essay_tfidf_test, project_title_tfidf_test)        
+
+
+    print("till now it's clean")    
+    # print("You are Done!")
     
 
