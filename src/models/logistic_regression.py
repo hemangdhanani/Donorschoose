@@ -45,7 +45,7 @@ def logistic_regression_model(X_tr, X_cv_vec, X_test, y_train, y_cv, y_test):
 
     y_pred = sig_clf.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred, normalize=True)
-    print("accuracy score is {accuracy}")
+    print(f"accuracy score is {accuracy}")
 # def logistic_regression_model(X_tr_vec, X_test_vec, y_train, y_test):
 #     alpha = [10 ** x for x in range(-6, 3)]
 

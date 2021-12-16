@@ -36,15 +36,6 @@ def random_forest_model(X_tr, X_cv_vec, X_test, y_train, y_cv, y_test):
     accuracy = accuracy_score(y_test, y_pred, normalize=True)
     print(f"accuracy score for linear svm: {accuracy}")
 
-# def random_forest_model(X_tr_vec, X_test_vec, y_train, y_test):
-#     # n_estimators = [100,200,500,1000,2000]
-#     # max_depth = [5, 10]
-#     param_grid = {'n_estimators': [100,200,500,1000,2000], 'max_depth': [5, 10]}
-#     rfc = RandomForestClassifier(n_jobs=-1,max_features= 'sqrt' , oob_score = True)
-#     CV_rfc = GridSearchCV(estimator=rfc, param_grid=param_grid, cv= 5)
-#     print("start fitting data......")
-#     CV_rfc.fit(X_tr_vec, y_train)
-#     print (CV_rfc.best_params_) 
 
 
 
