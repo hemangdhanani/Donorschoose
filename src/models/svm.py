@@ -3,11 +3,10 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, log_loss
 from sklearn.calibration import CalibratedClassifierCV
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix
 from sklearn.linear_model import SGDClassifier
 import numpy as np
 
-def svm_rbf_kernel_medel(X_tr, X_cv_vec, X_test, y_train, y_cv, y_test):
+def svm_rbf_kernel_model(X_tr, X_cv_vec, X_test, y_train, y_cv, y_test):
     alpha = [10 ** x for x in range(-5, 3)]
     cv_log_error_array = []
     for i in alpha:

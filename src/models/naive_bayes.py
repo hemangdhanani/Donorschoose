@@ -59,3 +59,8 @@ def multinomial_naive_bayes(X_tr, X_cv_vec, X_test, y_train, y_cv, y_test):
     print("Log Loss :",log_loss(y_cv, sig_clf_probs))
     print("Number of missclassified point :", np.count_nonzero((sig_clf.predict(X_cv_vec)- y_cv))/y_cv.shape[0])
     plot_confusion_matrix(y_cv, sig_clf.predict(X_cv_vec.toarray()))
+
+    # y_pred = sig_clf.predict(X_test)
+    accuracy = accuracy_score(y_test, y_test_score, normalize=True)
+    # print(f"accuracy score is {accuracy}")
+    return accuracy
