@@ -13,6 +13,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import Normalizer
 from scipy.sparse import hstack
+import joblib
 
 
 def drop_nans(data):
@@ -42,6 +43,7 @@ def school_state_ohe(X_train, X_test, X_cv):
     school_state_oho = vectorizer_school_state.transform(X_train['school_state'].values)
     school_state_oho_test = vectorizer_school_state.transform(X_test['school_state'].values)
     school_state_oho_cv = vectorizer_school_state.transform(X_cv['school_state'].values)
+    joblib.dump(vectorizer_school_state,'1_count_school_state.pkl')
     return school_state_oho, school_state_oho_test, school_state_oho_cv
 
 def teacher_prefix_ohe(X_train, X_test, X_cv):
@@ -50,6 +52,7 @@ def teacher_prefix_ohe(X_train, X_test, X_cv):
     teacher_pre_oho = vectorizer_prefix.transform(X_train['teacher_prefix'].values)
     teacher_pre_oho_test = vectorizer_prefix.transform(X_test['teacher_prefix'].values)
     teacher_pre_oho_cv = vectorizer_prefix.transform(X_cv['teacher_prefix'].values)
+    joblib.dump(vectorizer_prefix,'2_count_teacher_prefix.pkl')
     return teacher_pre_oho, teacher_pre_oho_test, teacher_pre_oho_cv
 
 def project_grade_category_ohe(X_train, X_test, X_cv):
@@ -58,6 +61,7 @@ def project_grade_category_ohe(X_train, X_test, X_cv):
     project_grade_oho = vectorizer_grade.transform(X_train['project_grade_category'].values)
     project_grade_oho_test = vectorizer_grade.transform(X_test['project_grade_category'].values)
     project_grade_oho_cv = vectorizer_grade.transform(X_cv['project_grade_category'].values)
+    joblib.dump(vectorizer_grade,'3_count_grade_category.pkl')
     return project_grade_oho, project_grade_oho_test, project_grade_oho_cv
 
 def previous_submitted_projects_norm(X_train, X_test, X_cv):    
@@ -71,7 +75,7 @@ def previous_submitted_projects_norm(X_train, X_test, X_cv):
     X_train_posted_project_norm = X_train_posted_project_norm.reshape(-1, 1)
     X_train_posted_project_norm_test = X_train_posted_project_norm_test.reshape(-1, 1)
     X_train_posted_project_norm_cv = X_train_posted_project_norm_cv.reshape(-1, 1)
-
+    # joblib.dump(vectorizer_grade,'4_count_grade_category.pkl')
     return X_train_posted_project_norm, X_train_posted_project_norm_test, X_train_posted_project_norm_cv
 
 def clean_categories(X_train, X_test, X_cv):
@@ -80,6 +84,7 @@ def clean_categories(X_train, X_test, X_cv):
     clean_categories_oho = vectorizer_cat.transform(X_train['clean_categories'].values)
     clean_categories_oho_test = vectorizer_cat.transform(X_test['clean_categories'].values)
     clean_categories_oho_cv = vectorizer_cat.transform(X_cv['clean_categories'].values)
+    joblib.dump(vectorizer_cat,'5_count_grade_clean_category.pkl')
     return clean_categories_oho, clean_categories_oho_test, clean_categories_oho_cv
 
 def clean_sub_categories(X_train, X_test, X_cv):
@@ -88,6 +93,7 @@ def clean_sub_categories(X_train, X_test, X_cv):
     clean_subcategories_oho = vectorizer_subcat.transform(X_train['clean_subcategories'].values)
     clean_subcategories_oho_test = vectorizer_subcat.transform(X_test['clean_subcategories'].values)
     clean_subcategories_oho_cv = vectorizer_subcat.transform(X_cv['clean_subcategories'].values)
+    joblib.dump(vectorizer_subcat,'6_count_grade_clean_sub_category.pkl')
     return clean_subcategories_oho, clean_subcategories_oho_test, clean_subcategories_oho_cv
 
 def price_normalized(X_train, X_test, X_cv):
@@ -100,6 +106,7 @@ def price_normalized(X_train, X_test, X_cv):
     price_norm = price_norm.reshape(-1, 1)
     price_norm_test = price_norm_test.reshape(-1, 1)
     price_norm_cv = price_norm_cv.reshape(-1, 1)
+    # joblib.dump(vectorizer_subcat,'7_count_grade_clean_sub_category.pkl')
     return price_norm, price_norm_test, price_norm_cv
 
 def essay_ohe(X_train, X_test, X_cv):    
@@ -108,6 +115,7 @@ def essay_ohe(X_train, X_test, X_cv):
     essay_tfidf = vectorizer.transform(X_train['essay'].values)
     essay_tfidf_test = vectorizer.transform(X_test['essay'].values)
     essay_tfidf_cv = vectorizer.transform(X_cv['essay'].values)
+    joblib.dump(vectorizer,'8_TF_IDF_essay.pkl')
     return essay_tfidf, essay_tfidf_test, essay_tfidf_cv
 
 def project_title_ohe(X_train, X_test, X_cv):
@@ -117,7 +125,8 @@ def project_title_ohe(X_train, X_test, X_cv):
     project_title_tfidf = vectorizer_bow_title.transform(X_train['project_title'].values)
     project_title_tfidf_test = vectorizer_bow_title.transform(X_test['project_title'].values)
     project_title_tfidf_cv = vectorizer_bow_title.transform(X_cv['project_title'].values)
-
+    
+    joblib.dump(vectorizer_bow_title,'9_TF_IDF_project_title.pkl')
     return project_title_tfidf, project_title_tfidf_test, project_title_tfidf_cv
 
 def merge_train_vectorization_columns(school_state_oho, teacher_pre_oho, project_grade_oho, X_train_posted_project_norm,

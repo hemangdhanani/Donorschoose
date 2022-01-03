@@ -3,6 +3,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import accuracy_score, log_loss
 import numpy as np
+import joblib
 
 def random_forest_model(X_tr, X_cv_vec, X_test, y_train, y_cv, y_test):
     alpha = [100,200,500,1000,2000]
@@ -24,6 +25,7 @@ def random_forest_model(X_tr, X_cv_vec, X_test, y_train, y_cv, y_test):
     clf.fit(X_tr, y_train)
     sig_clf = CalibratedClassifierCV(clf, method="sigmoid")
     sig_clf.fit(X_tr, y_train)
+    joblib.dump(clf, 'random_forest_model.pkl')
 
     predict_y = sig_clf.predict_proba(X_tr)
     print('For values of best estimator = ', alpha[int(best_alpha/2)], "The train log loss is:",log_loss(y_train, predict_y, labels=clf.classes_, eps=1e-15))

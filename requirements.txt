@@ -6,3 +6,5 @@ seaborn
 sklearn
 PyYAML
 scipy
+flask
+joblib

@@ -21,6 +21,8 @@ setup(
         "nltk",
         "seaborn",
         "sklearn",
-        "scipy"
+        "scipy",
+        "flask",
+        "joblib"
     ]
 )
